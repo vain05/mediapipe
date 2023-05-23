@@ -43,3 +43,12 @@ cc_binary(
         "//mediapipe/graphs/face_mesh:desktop_live_gpu_calculators",
     ],
 )
+
+cc_binary(
+    name = "face_landmarks_cpu",
+    data = ["//mediapipe/modules/face_landmark:face_landmark_with_attention.tflite"],
+    deps = [
+        "//mediapipe/examples/desktop:demo_run_graph_main_face_landmarks",
+        "//mediapipe/graphs/face_mesh:desktop_live_calculators",
+    ],
+)
