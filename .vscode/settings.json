@@ -26,6 +26,8 @@
         "hash_set": "cpp",
         "rope": "cpp",
         "slist": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "variant": "cpp",
+        "chrono": "cpp"
     }
 }

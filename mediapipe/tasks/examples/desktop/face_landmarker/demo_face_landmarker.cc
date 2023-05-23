@@ -118,6 +118,8 @@ absl::Status RunFaceLandmarker()
     bool grab_frames = true;
     while (grab_frames)
     {
+        size_t start = cv::getTickCount();
+
         // Capture opencv camera.
         cv::Mat camera_frame_raw;
         capture >> camera_frame_raw;
@@ -177,7 +179,8 @@ absl::Status RunFaceLandmarker()
         // show face blendshapes
         bool show_blendshapes = true;
         auto face_blendshapes = *std::move(result.face_blendshapes);
-        if (!face_blendshapes.empty())
+        float jaw_open_score = 0;
+        if (show_blendshapes && !face_blendshapes.empty())
         {
             // blendshapes of each face
             for (auto &blendshape : face_blendshapes)
@@ -188,11 +191,26 @@ absl::Status RunFaceLandmarker()
                     // to show whether user's jaw is open (a float value between 0 and 1)
                     if (category.index == 25)
                     {
+                        jaw_open_score = category.score;
                         LOG(INFO) << kBlendshapeNames[category.index] << ' ' << category.score;
                     }
                 } 
             }
         }
+
+        int fps = cv::getTickFrequency() / (cv::getTickCount() - start);
+
+        cv::putText(camera_frame_raw, std::string("FPS: ") + std::to_string(fps), 
+                    cv::Point(5, 15), cv::FONT_HERSHEY_SIMPLEX,
+                    0.5, cv::Scalar(100, 255, 0), 2, cv::LINE_AA);
+
+        cv::putText(camera_frame_raw, "Jaw Open Score",
+                    cv::Point(560, 15), cv::FONT_HERSHEY_SIMPLEX,
+                    0.5, cv::Scalar(100, 255, 0), 2, cv::LINE_AA);
+
+        cv::putText(camera_frame_raw, std::to_string(jaw_open_score),
+                    cv::Point(560, 35), cv::FONT_HERSHEY_SIMPLEX,
+                    0.5, cv::Scalar(100, 255, 0), 2, cv::LINE_AA);
 
         cv::imshow(kWindowName, camera_frame_raw);
         const int pressed_key = cv::waitKey(5);
