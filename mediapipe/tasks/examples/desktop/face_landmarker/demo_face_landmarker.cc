@@ -179,7 +179,7 @@ absl::Status RunFaceLandmarker()
 
     LOG(INFO) << "Start grabbing and processing frames.";
 
-    int count_frames = 150;
+    int count_frames = 300;
 
     bool grab_frames = true;
     while (grab_frames)
@@ -285,7 +285,7 @@ absl::Status RunFaceLandmarker()
                 LOG(INFO) << "Prepare video writer.";
                 writer.open(output_video_path,
                             mediapipe::fourcc('a', 'v', 'c', '1'), // .mp4
-                            cv::CAP_PROP_FPS, camera_frame_raw.size());
+                            30, camera_frame_raw.size());
                 RET_CHECK(writer.isOpened());
             }
 
