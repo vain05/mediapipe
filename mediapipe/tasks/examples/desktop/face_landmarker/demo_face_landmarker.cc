@@ -179,7 +179,7 @@ absl::Status RunFaceLandmarker()
 
     LOG(INFO) << "Start grabbing and processing frames.";
 
-    int count_frames = 300;
+    int count_frames = 5 * 60 * 30;
 
     bool grab_frames = true;
     while (grab_frames)
