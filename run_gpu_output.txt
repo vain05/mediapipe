@@ -1,0 +1,11 @@
+I20230526 10:51:21.506034 21676 demo_face_landmarker_gpu.cc:137] Initialize Face Landmarker options.
+I20230526 10:51:21.506317 21676 demo_face_landmarker_gpu.cc:145] Initialize Face Landmarker.
+W20230526 10:51:21.506819 21676 face_landmarker_graph.cc:168] Face blendshape model contains CPU only ops. Sets FaceBlendshapesGraph acceleration to Xnnpack.
+I20230526 10:51:21.520300 21676 gl_context_egl.cc:84] Successfully initialized EGL. Major : 1 Minor: 5
+I20230526 10:51:21.580826 21693 gl_context.cc:342] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 525.105.17), renderer: NVIDIA GeForce GTX 1660/PCIe/SSE2
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+I20230526 10:51:21.710382 21676 demo_face_landmarker_gpu.cc:149] Initialize the camera.
+[ WARN:0] global ../modules/videoio/src/cap_gstreamer.cpp (935) open OpenCV | GStreamer warning: Cannot query video position: status=0, value=-1, duration=-1
+I20230526 10:51:25.602331 21676 demo_face_landmarker_gpu.cc:181] Start grabbing and processing frames.
+I20230526 10:51:29.866412 21676 demo_face_landmarker_gpu.cc:306] Shutting down.
+I20230526 10:51:29.981868 21676 demo_face_landmarker_gpu.cc:326] Success!
