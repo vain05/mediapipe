@@ -394,7 +394,7 @@ mediapipe_proto_library(
 # If you want to have precise control of which implementations to include (e.g. for strict binary
 # size concerns), depend on those implementations directly, and do not depend on
 # :inference_calculator.
-# In all cases, use "InferenceCalulator" in your graphs.
+# In all cases, use "InferenceCalculator" in your graphs.
 cc_library_with_tflite(
     name = "inference_calculator_interface",
     srcs = ["inference_calculator.cc"],
@@ -655,6 +655,11 @@ cc_library(
     ] + select({
         "//mediapipe/gpu:disable_gpu": [],
         "//conditions:default": ["tensor_converter_calculator_gpu_deps"],
+    }) + select({
+        "//mediapipe:apple": [
+            "//third_party/apple_frameworks:MetalKit",
+        ],
+        "//conditions:default": [],
     }),
     alwayslink = 1,
 )
