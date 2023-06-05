@@ -124,6 +124,7 @@ static std::map<std::string, int> kBlendshapeNameToIndex = {
 ABSL_FLAG(std::string, input_video_path, "",
           "Full path of video to load. "
           "If not provided, attempt to use a webcam.");
+
 ABSL_FLAG(std::string, output_video_path, "",
           "Full path of where to save result (.mp4 only). "
           "If not provided, show result in a window.");
@@ -308,7 +309,7 @@ absl::Status RunFaceLandmarker()
     if (writer.isOpened())
         writer.release();
         
-    return absl::OkStatus();
+    return *(*face_landmarker)->Close();
 }
 
 int main(int argc, char **argv)
@@ -318,7 +319,7 @@ int main(int argc, char **argv)
     absl::Status run_status = RunFaceLandmarker();
     if (!run_status.ok())
     {
-        LOG(ERROR) << "Failed to run the graph: " << run_status.message();
+        LOG(ERROR) << "Failed to run Face Landmaker: " << run_status.message();
         return EXIT_FAILURE;
     }
     else
