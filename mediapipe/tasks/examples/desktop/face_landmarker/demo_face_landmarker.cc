@@ -195,7 +195,7 @@ absl::Status RunFaceLandmarker()
             if (!load_video)
             {
                 LOG(INFO) << "Ignore empty frames from camera.";
-                break;
+                continue;
             }
 
             LOG(INFO) << "Empty frame, end of video reached.";
